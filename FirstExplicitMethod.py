@@ -21,16 +21,17 @@ def k(p):
 grad_f = elementwise_grad(f)
 grad_k = elementwise_grad(k)
 
-# Initialize
+# Initialization
 i = 0
 x_i = np.array([1., -3.])
 p_i = np.array([0., 0.])
 
+# Hyper parameters
 gamma = 0.2
 epsilon = 0.01
-
 delta = 1/(1 + gamma*epsilon)
 
+# Define arrays to save
 F = np.array(f(x_i))
 X = np.reshape(x_i, (1, -1))
 
