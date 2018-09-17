@@ -39,7 +39,7 @@ print("Starting Optimization")
 while(1):
     p_ip1 = delta*p_i - epsilon*delta*grad_f(x_i)
     x_ip1 = x_i + epsilon*grad_k(p_ip1)
-    i = i + 1
+    i += 1
     if np.all(abs(x_i - x_ip1)<1e-6):
         break
     
@@ -50,7 +50,7 @@ while(1):
     F = np.append(F, f(x_i))
     X = np.append(X, np.reshape(x_i, (1, -1)), axis=0)
 
-print("Plotting result")
+print("Plotting Phase Space")
 xmin, xmax, xstep = -4.5, 4.5, .2
 ymin, ymax, ystep = -4.5, 4.5, .2
 
@@ -59,7 +59,7 @@ z = f([x, y])
 minima = np.array([0, 0])
 minima_ = minima.reshape(-1, 1)
 
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = plt.subplots(figsize=(10, 10))
 
 ax.contour(x, y, z, levels=np.logspace(0, 5, 35), norm=LogNorm(), cmap=plt.cm.jet)
 """
@@ -67,11 +67,21 @@ ax.quiver(X.T[0,:-1], X.T[1,:-1], X.T[0,1:]-X.T[0,:-1],
           X.T[1,1:]-X.T[1,:-1],
           scale_units='xy', angles='xy', scale=1, color='k')
 """
-ax.scatter(X.T[0], X.T[1])
-ax.plot(*minima_, 'r*', markersize=18)
+ax.scatter(X.T[0], X.T[1], s=5)
+ax.plot(*minima_, 'r*', markersize=5)
 
 ax.set_xlabel('x')
 ax.set_ylabel('y')
 
 ax.set_xlim((xmin, xmax))
 ax.set_ylim((ymin, ymax))
+plt.show()
+
+fig, ax = plt.subplots(figsize=(10, 5))
+I = np.arange(i)
+ax.set_xlabel('x')
+ax.set_ylabel('log[f(x)]')
+plt.scatter(I, np.log(F), s=5)
+plt.show()
+
+
