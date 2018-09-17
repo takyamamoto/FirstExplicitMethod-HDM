@@ -9,7 +9,7 @@ from matplotlib.colors import LogNorm
 import autograd.numpy as np  # Thinly-wrapped numpy
 from autograd import elementwise_grad
 
-# Define a function
+# Define functions
 def f(x):
     return (x[0] + x[1])**4 + (x[0]/2 - x[1]/2)**4
 	
@@ -17,7 +17,7 @@ def k(p):
     #return (3/4)*(np.power(p[0], (4/3)) + np.power(p[1], (4/3)))
     return (p[0]**2 + p[1]**2)/2
 
-# Obtain its gradient function
+# Obtain gradient functions
 grad_f = elementwise_grad(f)
 grad_k = elementwise_grad(k)
 
@@ -70,8 +70,8 @@ ax.quiver(X.T[0,:-1], X.T[1,:-1], X.T[0,1:]-X.T[0,:-1],
 ax.scatter(X.T[0], X.T[1])
 ax.plot(*minima_, 'r*', markersize=18)
 
-ax.set_xlabel('$x$')
-ax.set_ylabel('$y$')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
 
 ax.set_xlim((xmin, xmax))
 ax.set_ylim((ymin, ymax))
