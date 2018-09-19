@@ -12,17 +12,13 @@ from autograd import elementwise_grad
 # Define functions
 def f(x):
     return (x[0] + x[1])**4 + (x[0]/2 - x[1]/2)**4
-    
-def k(p):    
-    return (3/4)*(p[0]**(4/3) + p[1]**(4/3))
 
-def grad_k(p):
-    return np.real(np.sign(p)*np.abs([(p[0])**(1/3), (p[1])**(1/3)]))
-    #return (p[0]**2 + p[1]**2)/2
+def k(p):
+    return (p[0]**2 + p[1]**2)/2
 
 # Obtain gradient functions
 grad_f = elementwise_grad(f)
-#grad_k = elementwise_grad(k)
+grad_k = elementwise_grad(k)
 
 # Initialization
 i = 0
@@ -43,10 +39,10 @@ while(1): # Untill x converged
     p_ip1 = delta*p_i - epsilon*delta*grad_f(x_i)
     x_ip1 = x_i + epsilon*grad_k(p_ip1+0j)
     i += 1
-    
+
     if np.all(abs(x_i - x_ip1) < 1e-6):
         break
-    
+
     # Update x and p
     p_i = p_ip1
     x_i = x_ip1
@@ -54,7 +50,7 @@ while(1): # Untill x converged
     F = np.append(F, f(x_i))
     X = np.append(X, np.reshape(x_i, (1, -1)), axis=0)
 
-print("Plotting Phase Space")
+print("Plotting results")
 xmin, xmax, xstep = -4.5, 4.5, .2
 ymin, ymax, ystep = -4.5, 4.5, .2
 

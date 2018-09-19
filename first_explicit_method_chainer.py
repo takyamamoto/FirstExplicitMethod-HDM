@@ -16,7 +16,7 @@ from matplotlib.colors import LogNorm
 # Define functions
 def f(x): # Potential energy function
     return (x[0] + x[1])**4 + (x[0]/2 - x[1]/2)**4
-   
+
 def k(p, exponent=2): # Kinetic energy function
     return F.sum(F.absolute(p)**exponent)/exponent
 
@@ -36,33 +36,33 @@ X = np.reshape(x_i, (1, -1))
 
 print("Starting Optimization")
 while(1): # Untill x converged
-    """ First Explicit Method """    
+    """ First Explicit Method """
     # Compute grad f
     x_ivar = Variable(x_i)
     potential_energy = f(x_ivar)
     potential_energy.backward()
     grad_f = x_ivar.grad
-    
+
     # Equation 1
     p_ip1 = delta*p_i - epsilon*delta*grad_f
-    
-    # Compute grad k   
+
+    # Compute grad k
     p_ip1var = Variable(p_ip1)
     exponent = 4/3
     kinetic_energy = k(p_ip1var, exponent)
     kinetic_energy.backward()
     grad_k = p_ip1var.grad
-    
+
     # Equation 2
     x_ip1 = x_i + epsilon*grad_k
-    
+
     # Update i
     i += 1
-        
+
     # Check convergence
     if np.all(abs(x_i - x_ip1) < 1e-6):
         break
-    
+
     # Update x and p
     p_i = p_ip1
     x_i = x_ip1
@@ -70,12 +70,12 @@ while(1): # Untill x converged
     # print
     if i%1000==0:
         print("iter:", i,", f(x):", f(x_i))
-    
+
     # Save results
     f_store = np.append(f_store, f(x_i))
     X = np.append(X, np.reshape(x_i, (1, -1)), axis=0)
 
-print("Plotting Phase Space")
+print("Plotting results")
 xmin, xmax, xstep = -2.5, 2.5, .2
 ymin, ymax, ystep = -2.5, 2.5, .2
 
