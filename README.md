@@ -3,18 +3,18 @@ Implementation of Hamiltonian Descent Methods (First explicit method) with Pytho
 
 ## Requirement
 - Python 3.X
-- autograd
+- autograd or SymPy or Chainer v4
 - matplotlib
 
 ## Usage
 Run file
 
 ## Results
-### FirstExplicitMethod.py
+### first_explicit_method.py
 <img src="https://github.com/takyamamoto/FirstExplicitMethod-HDM/blob/master/images/phase.png" width=50%>
 <img src="https://github.com/takyamamoto/FirstExplicitMethod-HDM/blob/master/images/fx.png" width=50%>
 
-### FirstExplicitMethod_2.py
+### first_explicit_method_chainer.py
 <img src="https://github.com/takyamamoto/FirstExplicitMethod-HDM/blob/master/images/phase2.png" width=50%>
 <img src="https://github.com/takyamamoto/FirstExplicitMethod-HDM/blob/master/images/fx2.png" width=50%>
 
